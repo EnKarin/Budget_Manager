@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/Game of Life" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Linear Equations Solver" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Numeral System Converter" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/OOP/Kurs_OOP" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/OOP/lab2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Saod/B_tree" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Saod/Binary-B-tree" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Saod/Remove-B-tree" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Tic-Tac-Toe with AI" vcs="Git" />
+  </component>
+</project>
