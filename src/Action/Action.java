@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Action {
     private double income = 0;
-    private double balance;
+    private double balance = 0;
     private double allSum = 0;
     private double foodSum = 0;
     private double clothesSum = 0;
@@ -20,17 +20,13 @@ public class Action {
 
     public void income(){
         System.out.println("Enter income:");
-        income += scan.nextDouble();
-        balance += income;
+        double temp = scan.nextDouble();
+        income += temp;
+        balance += temp;
         System.out.println("Income was added!");
     }
 
-    public void food(){
-        scan.nextLine();
-        System.out.println("Enter purchase name:");
-        String temp = scan.nextLine();
-        System.out.println("Enter its price:");
-        double price = scan.nextDouble();
+    public void food(String temp, double price){
         balance -= price;
         allSum += price;
         foodSum += price;
@@ -40,12 +36,12 @@ public class Action {
         System.out.println("Purchase was added!");
     }
 
-    public void clothes(){
-        scan.nextLine();
-        System.out.println("Enter purchase name:");
-        String temp = scan.nextLine();
-        System.out.println("Enter its price:");
-        double price = scan.nextDouble();
+    public void food(String temp){
+        purch.add(temp);
+        food.add(temp);
+    }
+
+    public void clothes(String temp, double price){
         balance -= price;
         allSum += price;
         clothesSum += price;
@@ -55,12 +51,12 @@ public class Action {
         System.out.println("Purchase was added!");
     }
 
-    public void entertainment(){
-        scan.nextLine();
-        System.out.println("Enter purchase name:");
-        String temp = scan.nextLine();
-        System.out.println("Enter its price:");
-        double price = scan.nextDouble();
+    public void clothes(String temp){
+        purch.add(temp);
+        clothes.add(temp);
+    }
+
+    public void entertainment(String temp, double price){
         balance -= price;
         allSum += price;
         entertainmentSum += price;
@@ -70,12 +66,12 @@ public class Action {
         System.out.println("Purchase was added!");
     }
 
-    public void other(){
-        scan.nextLine();
-        System.out.println("Enter purchase name:");
-        String temp = scan.nextLine();
-        System.out.println("Enter its price:");
-        double price = scan.nextDouble();
+    public void entertainment(String temp){
+        purch.add(temp);
+        entertainment.add(temp);
+    }
+
+    public void other(String temp, double price){
         balance -= price;
         allSum += price;
         otherSum += price;
@@ -85,18 +81,11 @@ public class Action {
         System.out.println("Purchase was added!");
     }
 
-    public void all(){
-        scan.nextLine();
-        System.out.println("Enter purchase name:");
-        String temp = scan.nextLine();
-        System.out.println("Enter its price:");
-        double price = scan.nextDouble();
-        balance -= price;
-        allSum += price;
-        temp += " $" + price;
+    public void other(String temp){
         purch.add(temp);
-        System.out.println("Purchase was added!");
+        other.add(temp);
     }
+
 
     public void printAll(){
         if(purch.size() == 0){
@@ -164,5 +153,77 @@ public class Action {
 
     public void printBalance(){
         System.out.println("Balance: $" + balance);
+    }
+
+    public ArrayList<String> getClothes() {
+        return clothes;
+    }
+
+    public ArrayList<String> getFood() {
+        return food;
+    }
+
+    public ArrayList<String> getEntertainment() {
+        return entertainment;
+    }
+
+    public ArrayList<String> getOther() {
+        return other;
+    }
+
+    public double getAllSum() {
+        return allSum;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public double getClothesSum() {
+        return clothesSum;
+    }
+
+    public double getEntertainmentSum() {
+        return entertainmentSum;
+    }
+
+    public double getFoodSum() {
+        return foodSum;
+    }
+
+    public double getIncome() {
+        return income;
+    }
+
+    public double getOtherSum() {
+        return otherSum;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public void setIncome(double income) {
+        this.income = income;
+    }
+
+    public void setAllSum(double allSum) {
+        this.allSum = allSum;
+    }
+
+    public void setClothesSum(double clothesSum) {
+        this.clothesSum = clothesSum;
+    }
+
+    public void setEntertainmentSum(double entertainmentSum) {
+        this.entertainmentSum = entertainmentSum;
+    }
+
+    public void setFoodSum(double foodSum) {
+        this.foodSum = foodSum;
+    }
+
+    public void setOtherSum(double otherSum) {
+        this.otherSum = otherSum;
     }
 }
