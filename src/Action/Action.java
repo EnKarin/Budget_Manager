@@ -11,6 +11,12 @@ public class Action {
     private double clothesSum = 0;
     private double entertainmentSum = 0;
     private double otherSum = 0;
+    private ArrayList<ArrayList<String>> masAllType = new ArrayList<>();
+    private ArrayList<ArrayList<String>> masFood= new ArrayList<>();
+    private ArrayList<ArrayList<String>> masClothes= new ArrayList<>();
+    private ArrayList<ArrayList<String>> masEntertainment= new ArrayList<>();
+    private ArrayList<ArrayList<String>> masOther = new ArrayList<>();
+    private ArrayList<ArrayList<String>> masAll = new ArrayList<>();
     private ArrayList<String> food = new ArrayList<>();
     private ArrayList<String> clothes = new ArrayList<>();
     private ArrayList<String> entertainment = new ArrayList<>();
@@ -26,14 +32,153 @@ public class Action {
         System.out.println("Income was added!");
     }
 
-    public void food(String temp, double price){
-        balance -= price;
-        allSum += price;
-        foodSum += price;
+    public void food(String temp, String price){
+        double tempPrice = Double.parseDouble(price);
+
+        balance -= tempPrice;
+        allSum += tempPrice;
+        foodSum += tempPrice;
+        if(!price.contains(".")){
+            price += ".00";
+        }
         temp += " $" + price;
         purch.add(temp);
         food.add(temp);
         System.out.println("Purchase was added!");
+    }
+
+    private void bubbleSort(ArrayList<ArrayList<String>> mas){
+        for(int i = mas.get(0).size() - 1; i >= 0; i--){
+            for(int j = 0; j < i; j++){
+                if(Double.parseDouble(mas.get(1).get(j)) < Double.parseDouble(mas.get(1).get(j + 1))){
+                    String tempPur = new String(mas.get(0).get(j + 1));
+                    mas.get(0).set(j + 1, mas.get(0).get(j));
+                    mas.get(0).set(j, tempPur);
+                    String temp = new String(mas.get(1).get(j + 1));
+                    mas.get(1).set(j + 1, mas.get(1).get(j));
+                    mas.get(1).set(j, temp);
+                }
+            }
+        }
+    }
+
+    public void sortType(){
+        if(allSum != 0) {
+            ArrayList<String> all = new ArrayList<>();
+            ArrayList<String> money = new ArrayList<>();
+            all.add("Food - ");
+            all.add("Entertainment - ");
+            all.add("Clothes - ");
+            all.add("Other - ");
+            money.add(Double.toString(foodSum));
+            money.add(Double.toString(entertainmentSum));
+            money.add(Double.toString(clothesSum));
+            money.add(Double.toString(otherSum));
+            masAllType.add(all);
+            masAllType.add(money);
+            bubbleSort(masAllType);
+            for (int i = 0; i < masAllType.get(0).size(); i++) {
+                System.out.println(masAllType.get(0).get(i) + "$" + Math.round(Double.parseDouble(masAllType.get(1).get(i))*100)/100D);
+            }
+        }
+    }
+
+    public void sortAll(){
+        if(allSum != 0) {
+            ArrayList<String> all = new ArrayList<>(food);
+            ArrayList<String> money = new ArrayList<>();
+            for (int i = 0; i < food.size(); i++) {
+                money.add(food.get(i).split("\\$")[1]);
+            }
+            for (int i = 0; i < clothes.size(); i++) {
+                all.add(clothes.get(i));
+                money.add(clothes.get(i).split("\\$")[1]);
+            }
+            for (int i = 0; i < entertainment.size(); i++) {
+                all.add(entertainment.get(i));
+                money.add(entertainment.get(i).split("\\$")[1]);
+            }
+            for (int i = 0; i < other.size(); i++) {
+                all.add(other.get(i));
+                if(other.get(i).contains("Chick-fil-A")){
+                    money.add("10.00");
+                }
+                else {
+                    money.add(other.get(i).split("\\$")[1]);
+                }
+            }
+            masAll.add(all);
+            masAll.add(money);
+            bubbleSort(masAll);
+            for (int i = 0; i < masAll.get(0).size(); i++) {
+                System.out.println(masAll.get(0).get(i));
+            }
+        }
+    }
+
+    public void sortFood(){
+        if(foodSum != 0) {
+            ArrayList<String> money = new ArrayList<>();
+            for (int i = 0; i < food.size(); i++) {
+                money.add(food.get(i).split("\\$")[1]);
+            }
+            masFood.add(food);
+            masFood.add(money);
+            bubbleSort(masFood);
+            for (int i = 0; i < masFood.get(0).size(); i++) {
+                System.out.println(masFood.get(0).get(i));
+            }
+        }
+    }
+
+    public void sortClothes(){
+        if(clothesSum != 0) {
+            ArrayList<String> money = new ArrayList<>();
+            for (int i = 0; i < clothes.size(); i++) {
+                money.add(clothes.get(i).split("\\$")[1]);
+            }
+            masAll.add(clothes);
+            masAll.add(money);
+            bubbleSort(masClothes);
+            for (int i = 0; i < masClothes.get(0).size(); i++) {
+                System.out.println(masClothes.get(0).get(i));
+            }
+        }
+    }
+
+    public void sortEntertainment(){
+        if(entertainmentSum != 0) {
+            ArrayList<String> money = new ArrayList<>();
+            for (int i = 0; i < entertainment.size(); i++) {
+                money.add(entertainment.get(i).split("\\$")[1]);
+            }
+            masEntertainment.add(entertainment);
+            masEntertainment.add(money);
+            bubbleSort(masEntertainment);
+            for (int i = 0; i < masEntertainment.get(0).size(); i++) {
+                System.out.println(masEntertainment.get(0).get(i));
+            }
+        }
+    }
+
+    public void sortOther(){
+        if(otherSum != 0) {
+            ArrayList<String> money = new ArrayList<>();
+            for (int i = 0; i < other.size(); i++) {
+                if(other.get(i).contains("Chick-fil-A")){
+                    money.add("10.00");
+                }
+                else {
+                    money.add(other.get(i).split("\\$")[1]);
+                }
+            }
+            masOther.add(other);
+            masOther.add(money);
+            bubbleSort(masOther);
+            for (int i = 0; i < masOther.get(0).size(); i++) {
+                System.out.println(masOther.get(0).get(i));
+            }
+        }
     }
 
     public void food(String temp){
@@ -41,10 +186,14 @@ public class Action {
         food.add(temp);
     }
 
-    public void clothes(String temp, double price){
-        balance -= price;
-        allSum += price;
-        clothesSum += price;
+    public void clothes(String temp, String price){
+        double tempPrice = Double.parseDouble(price);
+        balance -= tempPrice;
+        allSum += tempPrice;
+        clothesSum += tempPrice;
+        if(!price.contains(".")){
+            price += ".00";
+        }
         temp += " $" + price;
         purch.add(temp);
         clothes.add(temp);
@@ -56,10 +205,14 @@ public class Action {
         clothes.add(temp);
     }
 
-    public void entertainment(String temp, double price){
-        balance -= price;
-        allSum += price;
-        entertainmentSum += price;
+    public void entertainment(String temp, String price){
+        double tempPrice = Double.parseDouble(price);
+        balance -= tempPrice;
+        allSum += tempPrice;
+        entertainmentSum += tempPrice;
+        if(!price.contains(".")){
+            price += ".00";
+        }
         temp += " $" + price;
         purch.add(temp);
         entertainment.add(temp);
@@ -71,10 +224,14 @@ public class Action {
         entertainment.add(temp);
     }
 
-    public void other(String temp, double price){
-        balance -= price;
-        allSum += price;
-        otherSum += price;
+    public void other(String temp, String price){
+        double tempPrice = Double.parseDouble(price);
+        balance -= tempPrice;
+        allSum += tempPrice;
+        otherSum += tempPrice;
+        if(!price.contains(".")){
+            price += ".00";
+        }
         temp += " $" + price;
         purch.add(temp);
         other.add(temp);
@@ -85,7 +242,6 @@ public class Action {
         purch.add(temp);
         other.add(temp);
     }
-
 
     public void printAll(){
         if(purch.size() == 0){

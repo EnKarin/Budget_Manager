@@ -11,8 +11,8 @@ public class Main{
         Scanner scan = new Scanner(System.in);
         Action temp = new Action();
         String tempPurchase;
+        String price;
         File file = new File("purchases.txt");
-        double price;
         boolean flag = true;
         while(flag){
             System.out.println("Choose your action:");
@@ -49,7 +49,7 @@ public class Main{
                                 System.out.println("Enter purchase name:");
                                 tempPurchase = scan.nextLine();
                                 System.out.println("Enter its price:");
-                                price = scan.nextDouble();
+                                price = scan.next();
                                 System.out.println();
                                 temp.food(tempPurchase, price);
                                 break;
@@ -58,7 +58,7 @@ public class Main{
                                 System.out.println("Enter purchase name:");
                                 tempPurchase = scan.nextLine();
                                 System.out.println("Enter its price:");
-                                price = scan.nextDouble();
+                                price = scan.next();
                                 System.out.println();
                                 temp.clothes(tempPurchase, price);
                                 break;
@@ -67,7 +67,7 @@ public class Main{
                                 System.out.println("Enter purchase name:");
                                 tempPurchase = scan.nextLine();
                                 System.out.println("Enter its price:");
-                                price = scan.nextDouble();
+                                price = scan.next();
                                 System.out.println();
                                 temp.entertainment(tempPurchase, price);
                                 break;
@@ -76,7 +76,7 @@ public class Main{
                                 System.out.println("Enter purchase name:");
                                 tempPurchase = scan.nextLine();
                                 System.out.println("Enter its price:");
-                                price = scan.nextDouble();
+                                price = scan.next();
                                 System.out.println();
                                 temp.other(tempPurchase, price);
                                 break;
@@ -129,6 +129,7 @@ public class Main{
                 case 4:
                     System.out.println();
                     temp.printBalance();
+                    System.out.println();
                     break;
                 case 5:
                     file.delete();
@@ -213,6 +214,84 @@ public class Main{
                     scanner.close();
                     System.out.println("Purchases were loaded!");
                     System.out.println();
+                    break;
+                case 7:
+                    System.out.println();
+                    bool = true;
+                    while(bool) {
+                        System.out.println("How do you want to sort?");
+                        System.out.println("1) Sort all purchases");
+                        System.out.println("2) Sort by type");
+                        System.out.println("3) Sort certain type");
+                        System.out.println("4) Back");
+                        switch (scan.nextInt()) {
+                            case 1:
+                                System.out.println();
+                                if(temp.getAllSum() != 0) {
+                                    System.out.println("All:");
+                                    temp.sortAll();
+                                    System.out.println("Total: " + temp.getAllSum());
+                                }
+                                else System.out.println("Purchase list is empty!");
+                                break;
+                            case 2:
+                                System.out.println();
+                                System.out.println("Types:");
+                                temp.sortType();
+                                System.out.println("Total sum: " + temp.getAllSum());
+                                break;
+                            case 3:
+                                System.out.println();
+                                System.out.println("Choose the type of purchase");
+                                System.out.println("1) Food");
+                                System.out.println("2) Clothes");
+                                System.out.println("3) Entertainment");
+                                System.out.println("4) Other");
+                                switch (scan.nextInt()) {
+                                    case 1:
+                                        System.out.println();
+                                        if(temp.getFoodSum() != 0) {
+                                            System.out.println("Food:");
+                                            temp.sortFood();
+                                            System.out.println("Total sum: " + temp.getFoodSum());
+                                        }
+                                        else System.out.println("Purchase list is empty!");
+                                        break;
+                                    case 2:
+                                        System.out.println();
+                                        if(temp.getClothesSum() != 0) {
+                                            System.out.println("Clothes:");
+                                            temp.sortClothes();
+                                            System.out.println("Total sum: " + temp.getClothesSum());
+                                        }
+                                        else System.out.println("Purchase list is empty!");
+                                        break;
+                                    case 3:
+                                        System.out.println();
+                                        if(temp.getEntertainmentSum() != 0) {
+                                            System.out.println("Entertainment:");
+                                            temp.sortEntertainment();
+                                            System.out.println("Total sum: " + temp.getEntertainmentSum());
+                                        }
+                                        else System.out.println("Purchase list is empty!");
+                                        break;
+                                    case 4:
+                                        System.out.println();
+                                        if(temp.getEntertainmentSum() != 0) {
+                                            System.out.println("Other:");
+                                            temp.sortOther();
+                                            System.out.println("Total sum: " + temp.getOtherSum());
+                                        }
+                                        else System.out.println("Purchase list is empty!");
+                                        break;
+                                }
+                                break;
+                            case 4:
+                                bool = false;
+                                break;
+                        }
+                        System.out.println();
+                    }
                     break;
             }
             System.out.println();
